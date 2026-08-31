@@ -1,0 +1,29 @@
+[project]
+name = "uvi-phy320"
+version = "0.1.0"
+description = "Course materials and tooling for UVI PHY 320"
+requires-python = ">=3.11"
+dependencies = [
+    "pyyaml>=6.0",
+    "numpy>=2.0",
+    "scipy>=1.14",
+    "matplotlib>=3.9",
+    "jupyterlab>=4.0",
+    "nbdime>=4.0",
+    "nbstripout>=0.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    # Headless chromium, for `make <notebook>.pdf`.  Deliberately a dev
+    # extra: students `uv sync` without it and never download the browser.
+    "playwright>=1.40",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+pythonpath = ["."]

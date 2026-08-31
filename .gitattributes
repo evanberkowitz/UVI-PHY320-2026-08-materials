@@ -1,0 +1,18 @@
+# Notebooks are stored without their outputs.
+#
+# Your working copy keeps them -- run the code, look at the results -- but what
+# git records is the code you wrote.  Two reasons.  Outputs are where notebook
+# merge conflicts come from, so stripping them keeps `git pull` from turning
+# into an unreadable mess every time an assignment is revised.  And your code is
+# what is being marked: I run your notebook, rather than reading a picture of
+# what it printed on your laptop.
+#
+# The filter itself lives in .git/config and does not travel with a clone, so
+# note/getting-set-up.ipynb sets it up.  If `git add` starts refusing a notebook,
+# that is this filter telling you it is not configured -- section 6 of that
+# notebook is the fix.
+*.ipynb filter=nbstripout
+
+# Readable notebook diffs, once `uv run nbdime config-git --enable` has run.
+*.ipynb diff=jupyternotebook
+*.ipynb merge=jupyternotebook

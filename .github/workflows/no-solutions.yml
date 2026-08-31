@@ -1,0 +1,22 @@
+name: no solutions
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # The audit is pure standard library.  Installing numpy, scipy,
+      # matplotlib and jupyterlab on every push to scan for a handful of
+      # tokens buys nothing and costs a minute each time.
+      - name: Check for solutions, tags and saved outputs
+        run: python -m tool.audit .
