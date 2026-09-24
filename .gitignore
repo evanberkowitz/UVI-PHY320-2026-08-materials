@@ -1,0 +1,56 @@
+# What not to commit.
+#
+# Everything the course hands you is already tracked, so nothing here can hide
+# an assignment or a dataset from you.  These rules only keep *new* clutter out
+# of your repository -- the files your tools generate while you work, which are
+# not the work itself.
+
+## Jupyter checkpoints.
+#
+# Jupyter saves a checkpoint copy beside every notebook you open.  It is a
+# stale duplicate of your own work: committing it means carrying two versions
+# of the same assignment, and the old one starts conflicting with `git pull`
+# every time an assignment is revised.  JupyterLab's `.virtual_documents` is
+# the same idea for its editor.
+.ipynb_checkpoints/
+.virtual_documents/
+
+## Python's build noise.
+#
+# Python caches a compiled copy of every module it imports.  These are
+# machine-specific, regenerated on demand, and of no interest to anyone.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+## Virtual environments.
+#
+# `uv sync` rebuilds these from uv.lock, which *is* tracked.  The environment
+# itself is large, machine-specific, and would be wrong on anyone else's
+# computer anyway.
+.venv/
+venv/
+
+## Datasets and media.
+#
+# Large binaries do not belong in a repository that is pulled every week.  Any
+# data the course ships you is already tracked, so these rules only stop you
+# committing something new by accident -- a figure you exported, a file you
+# downloaded.  Your code is what is marked, and .gitattributes already strips
+# notebook outputs, so a plot you made lives in your notebook, not as a file.
+#
+# If an assignment ever does ask you to commit one of these, `git add -f` says
+# you meant it.
+*.h5
+*.hdf5
+*.npz
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.wav
+*.mp3
+*.mp4
+
+## macOS leaves these everywhere.
+.DS_Store
