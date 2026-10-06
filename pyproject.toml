@@ -11,6 +11,7 @@ dependencies = [
     "jupyterlab>=4.0",
     "nbdime>=4.0",
     "nbstripout>=0.7",
+    "imageio-ffmpeg>=0.6.0",
 ]
 
 [project.optional-dependencies]
