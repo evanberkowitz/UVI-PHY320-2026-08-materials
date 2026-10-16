@@ -32,11 +32,15 @@ from tool.markers import SOLUTION_TAG
 # word boundary; without one, a heading like "## Elsewhere" would be flagged.
 # For the same reason BEGIN and END must be followed by SOLUTION: "##
 # Beginning" is a plausible heading and must not abort a publish.
+# Question markers have no code form, and must close the comment: a word
+# like QUESTION is fair game at the start of an ordinary HTML comment.
 _MARKER = (
     r"#{2,}[ \t]*(?:BEGIN|END)[ \t]*SOLUTIONS?\b"
     r"|#{2,}[ \t]*ELSE\b"
     r"|<!--[ \t]*(?:BEGIN|END)[ \t]*SOLUTIONS?\b"
     r"|<!--[ \t]*ELSE[ \t]*-->"
+    r"|<!--[ \t]*(?:END[ \t]*)?QUESTIONS?[ \t]*-->"
+    r"|<!--[ \t]*ANSWERS?[ \t]*-->"
 )
 
 MARKER_PATTERN = re.compile(_MARKER, re.IGNORECASE)
