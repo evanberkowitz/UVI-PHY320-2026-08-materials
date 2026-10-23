@@ -103,6 +103,8 @@ class Grammar:
     block, and `keeps[mode]` says whether the first and second arm survive.
     `resolve` is applied to every line of the second arm, in both modes,
     so that a malformed one is an error even when the mode discards it.
+    `separate` puts a blank line between the arms when both survive, so
+    that markdown does not run them together into one paragraph.
     """
 
     begin: str
@@ -114,6 +116,7 @@ class Grammar:
     resolve: object
     stub: object = None
     require_middle: bool = False
+    separate: bool = False
 
 
 def _transform(lines, mode, grammars):
@@ -162,6 +165,8 @@ def _transform(lines, mode, grammars):
             if second:
                 _fail(f"second {middle_name} in one block", lineno)
             second = True
+            if block.separate and all(block.keeps[mode]) and out and out[-1].strip():
+                out.append("")
         else:
             if block is None:
                 _fail(f"{end_name} without {begin_name}", lineno)
@@ -205,6 +210,7 @@ QUESTION_GRAMMAR = Grammar(
     keeps={STRIP: (True, False), KEEP: (True, True)},
     resolve=verbatim,
     require_middle=True,
+    separate=True,
 )
 
 
